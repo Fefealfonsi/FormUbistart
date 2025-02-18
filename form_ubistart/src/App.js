@@ -1,4 +1,4 @@
-import React, {useState, useEffect }from "react"
+import React, {useState}from "react"
 import Campo from './components/Campo';
 import {AppContainer, FormContainer, Logo} from "./appStyle"
 import logotipo from "./images/logotipo.png"
@@ -12,32 +12,25 @@ function App() {
   const [dados, setDados] = useState({})
   const [endereco, setEndereco] = useState("")
 
-  useEffect(()=>{
-    buscarCep(dados.cep)
-  },[endereco])
+  
 
   const onHandleInput=(event)=>{
     const {name,value} = event.target
-  
     setInputs({...inputs,[name]:value})
   }
-
-  
 
   const buscarCep=(cep)=>{
     axios.get(`https://brasilapi.com.br/api/cep/v1/${cep}`)
     .then((res)=>{setEndereco(res.data);})
     .catch((err)=>{console.log(err.response.data.message);})
-
   }
  
-
   const enviar=(event)=>{
    event.preventDefault()
+   buscarCep(inputs.cep)
    setDados(inputs)
    
 
-   buscarCep(dados.cep)
 
    setInputs( {nome:"", email:"", cep:""})
   }
@@ -76,12 +69,13 @@ function App() {
         name={"cep"}
         value={inputs.cep}
         text={"digite seu CEP"}
-        pattern={"/^\d{8}$/"}
-        title={"O cep deve ter 8 caracteres"}
+        //pattern={"^\d{8}$"}
+        //title={"O cep deve ter 8 caracteres"}
         />
 
         <Campo type={"submit"} />
      </FormContainer>
+     {endereco.cep?
      <div>
        <p>{dados.nome}</p>
        <p>{dados.email}</p>
@@ -91,7 +85,7 @@ function App() {
        <p>{endereco.neighborhood}</p>
        <p>{endereco.street}</p>
        
-     </div>
+     </div>: <h3>Cep inválido</h3>}
     </AppContainer>
   );
 }
