@@ -13,7 +13,9 @@ Botão de enviar (para realizar a request para o backend).
 ## Validações: 
 - Entrada dos dados;
 - Aceitar somente números no CEP; 
-- Não aceitar números no Nome se o email é válido se o email já existe.
+- Não aceitar números no Nome 
+- se o email é válido 
+- se o email já existe.
 
 ## Opcionais: 
 - Listar dados abaixo do formulário de cadastro;
