@@ -29,14 +29,11 @@ function App() {
    event.preventDefault()
    buscarCep(inputs.cep)
    setDados(inputs)
-   
-
-
    setInputs( {nome:"", email:"", cep:""})
   }
 
   
- console.log(dados);
+ console.log(dados.cep);
  console.log(endereco.street);
 
 
@@ -69,13 +66,12 @@ function App() {
         name={"cep"}
         value={inputs.cep}
         text={"digite seu CEP"}
-        //pattern={"^\d{8}$"}
-        //title={"O cep deve ter 8 caracteres"}
+        min="8"
         />
 
         <Campo type={"submit"} />
      </FormContainer>
-     {endereco.cep?
+     {endereco &&
      <div>
        <p>{dados.nome}</p>
        <p>{dados.email}</p>
@@ -85,7 +81,9 @@ function App() {
        <p>{endereco.neighborhood}</p>
        <p>{endereco.street}</p>
        
-     </div>: <h3>Cep inválido</h3>}
+     </div> }
+     {(inputs.cep.length!==8 && inputs.cep!== "" ) && <h3>Cep deve ter 8 numeros</h3>}
+     {dados.cep===undefined && <h3></h3> }
     </AppContainer>
   );
 }
