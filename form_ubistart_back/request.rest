@@ -1,0 +1,26 @@
+POST http://localhost:3003/user
+content-type: application/json
+
+{
+    "name": "Leandro",
+    "email": "lele@gmail.com",
+    "user_cep": "07152003"
+}
+
+###
+
+GET http://localhost:3003/user
+content-type: application/json
+
+###
+
+PUT http://localhost:3003/user/1740011934930
+content-type: application/json
+
+{
+    
+    "email": "leandroauto@gmail.com"
+    
+}
+
+###
