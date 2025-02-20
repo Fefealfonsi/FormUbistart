@@ -22,11 +22,12 @@ Botão de enviar (para realizar a request para o backend).
 
 ### Informações adicionais:
 Na parte do CEP, deve ser validado se o CEP digitado já existe via integração com API externa no backend;
+O participante deve subir para o github em repositório aberto e compartilhar o link por e-mail
 
 ## 📱Funcionalidades do Projeto
 ### Front end
 
- - [x]Cadastro de usuário
+ - [x] Cadastro de usuário
  - [x] Listar dados abaixo do formulário de cadastro
  - [x] Emitir mensagens de erro vindas do backend 
  - [x] validação de dados
@@ -51,4 +52,4 @@ Na parte do CEP, deve ser validado se o CEP digitado já existe via integração
 
 
 
-O participante deve subir para o github em repositório aberto e compartilhar o link por e-mail
+
