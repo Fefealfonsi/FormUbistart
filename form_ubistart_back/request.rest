@@ -2,9 +2,9 @@ POST http://localhost:3003/user
 content-type: application/json
 
 {
-    "name": "Leandro",
-    "email": "lele@gmail.com",
-    "user_cep": "07152003"
+    "name": "Vivi",
+    "email": "vivi@gmail.com",
+    "user_cep": "02471000"
 }
 
 ###
@@ -19,7 +19,7 @@ content-type: application/json
 
 {
     
-    "email": "leandroauto@gmail.com"
+    "email": "liliandro@gmai.com"
     
 }
 
