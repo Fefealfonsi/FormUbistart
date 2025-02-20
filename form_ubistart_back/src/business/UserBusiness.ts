@@ -32,7 +32,7 @@ export class UserBusiness{
         }
 
         const users= await database.findUser()
-        console.log(users);
+      
         
         for (const user of users) {
             if (email === user.email) {
@@ -92,7 +92,7 @@ export class UserBusiness{
         }
 
         const users= await database.findUser()
-        console.log(users);
+     
         
         for (const user of users) {
             if (input.email === user.email) {
