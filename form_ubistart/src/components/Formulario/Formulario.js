@@ -3,11 +3,9 @@ import Campo from '../Campo/Campo';
 import { FormContainer} from "./style"
 import axios from "axios";
 
-function Formulario({dados, setDados, setMessage}) {
+function Formulario({setMessage, getUserByEmail, exibe, setExibe}) {
     const [inputs, setInputs]=useState({name:"", email:"", cep:""})
     
-    
-
     const onHandleInput=(event)=>{
         const {name,value} = event.target
         setInputs({...inputs,[name]:value})
@@ -18,30 +16,27 @@ function Formulario({dados, setDados, setMessage}) {
         .then((res)=>{setMessage(res.data);})
         .catch((err)=>{setMessage(err.response.data);})
       }
-      const getUserByEmail=(email)=>{
-        axios.get(`http://localhost:3003/user/${email}`)
-        .then((res)=>{setDados(res.data[0])})
-        .catch((err)=>{setMessage(err.response.data)})
-      }
+      
 
       const body={
         name:inputs.name,
         email:inputs.email,
         user_cep:inputs.cep
       }
-      // console.log("BODY", body);
+      
 
-      const cadastrar=(event)=>{
+      async function cadastrar(event){
         event.preventDefault()
-        userRegister(body)
-        getUserByEmail(body.email)
+         userRegister(body)
        
-       
-        setInputs({name:"", email:"", cep:""})
-        // console.log("Dados", dados);
+         setTimeout(() => {
+          getUserByEmail(body.email)
+          setExibe(!exibe)
+          setInputs({name:"", email:"", cep:""})
+         }, 1000);
+        
       }
-      // console.log("Dados", dados);
-      //  console.log("INPUTS",inputs);
+    
        
 
     return (
