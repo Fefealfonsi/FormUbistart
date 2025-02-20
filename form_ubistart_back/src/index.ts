@@ -14,6 +14,7 @@ const controller = new UserController()
 
 app.get("/user", controller.getUser)
 app.post("/user", controller.createUser)
+app.get("/user/:email", controller.getUserByEmail)
 app.put("/user/:id", controller.updateUser)
 
 

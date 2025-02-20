@@ -13,6 +13,16 @@ export class UserDatabase extends BaseDatabase{
     `)
         return result
     }
+    public async getUserByEmail (email:string):Promise<UserAddressOutputDTO>{
+
+        const result:UserAddressOutputDTO = await BaseDatabase.connection.raw(`
+        SELECT * FROM ${UserDatabase.TABLE_ADDRESS}
+        INNER JOIN ${UserDatabase.TABLE_USER}
+        ON user.user_cep = address.cep
+        WHERE email = '${email}';
+    `)
+        return result
+    }
 
     public async insertUser(parameter:UserDB){
         await BaseDatabase.connection(UserDatabase.TABLE_USER).insert(parameter)

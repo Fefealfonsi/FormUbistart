@@ -12,6 +12,19 @@ export class UserBusiness{
 
 
     }
+    getUserByEmail = async(email:string):Promise<UserAddressOutputDTO>=>{
+        const database = new UserDatabase() 
+
+        if (!email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi)) {
+            throw new Error("O formato do email não é valido")
+        }
+        const result = database.getUserByEmail(email) 
+        console.log(result);
+        
+        return result
+
+
+    }
     createUser = async(input:CreateUserDB)=>{
 
         const {name, email, user_cep} = input

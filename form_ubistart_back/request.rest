@@ -13,6 +13,10 @@ GET http://localhost:3003/user
 content-type: application/json
 
 ###
+GET http://localhost:3003/user/beltrano@email.com
+content-type: application/json
+
+###
 
 PUT http://localhost:3003/user/1740011934930
 content-type: application/json

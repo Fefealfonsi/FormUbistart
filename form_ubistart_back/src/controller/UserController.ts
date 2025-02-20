@@ -24,6 +24,28 @@ export class UserController {
             }
         }
     }
+    getUserByEmail = async (req: Request, res: Response) => {
+        try {
+            const email = req.params.email
+            const business = new UserBusiness()
+
+            const result = await business.getUserByEmail(email)
+
+            res.status(200).send(result)
+
+        } catch (error: any) {
+            console.log(error)
+
+            if (res.statusCode === 200) {
+                res.status(500)
+            }
+            if (error instanceof Error) {
+                res.send(error.message)
+            } else {
+                res.send("Erro inesperado")
+            }
+        }
+    }
     createUser = async (req: Request, res: Response) => {
         try {
 

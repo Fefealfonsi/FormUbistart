@@ -27,8 +27,12 @@ VALUES
 
 SELECT * FROM address 
 INNER JOIN user
-ON user.user_cep = address.cep;
+ON user.user_cep = address.cep
+where email="beltrano@email.com";
 
 select* from user;
+select* from address;
 DROP TABLE user;
 DROP TABLE address;
+
+DELETE FROM "user";
