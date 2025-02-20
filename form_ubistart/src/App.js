@@ -1,89 +1,47 @@
 import React, {useState}from "react"
-import Campo from './components/Campo';
-import {AppContainer, FormContainer, Logo} from "./appStyle"
+import Formulario from './components/Formulario/Formulario'
+import {AppContainer, LogoContainer, Logo, Title, Message} from "./appStyle"
 import logotipo from "./images/logotipo.png"
-import axios from "axios";
-
-
 
 function App() {
 
-  const [inputs, setInputs]=useState({nome:"", email:"", cep:""})
-  const [dados, setDados] = useState({})
-  const [endereco, setEndereco] = useState("")
+  const [dados, setDados] = useState({cep:"",city:"", email:"",id:"", name:"", neighborhood:"", service:"", state:"", street:"", user_cep:"" })
+  const [exibe, setExibe] = useState(false)
+  const [message, setMessage] = useState("")
 
-  
-
-  const onHandleInput=(event)=>{
-    const {name,value} = event.target
-    setInputs({...inputs,[name]:value})
-  }
-
-  const buscarCep=(cep)=>{
-    axios.get(`https://brasilapi.com.br/api/cep/v1/${cep}`)
-    .then((res)=>{setEndereco(res.data);})
-    .catch((err)=>{console.log(err.response.data.message);})
-  }
- 
-  const enviar=(event)=>{
-   event.preventDefault()
-   buscarCep(inputs.cep)
-   setDados(inputs)
-   setInputs( {nome:"", email:"", cep:""})
-  }
-
-  
- console.log(dados.cep);
- console.log(endereco.street);
-
+  console.log("DADOS",dados);
 
   return (
     <AppContainer>
+      <LogoContainer>
 
-     <FormContainer onSubmit={enviar}>
+      <Title>Formulários de Cadastro</Title>
       <Logo src={logotipo} alt="" />
-        <Campo
-        type={"text"}
-        onHandleInput={onHandleInput}
-        name={"nome"}
-        value={inputs.nome}
-        text={"Nome completo"}
-        //pattern={"/^[A-Za-záéíóúãõâêîôûàèìòùç]+$/"}
-        //title={"Letras de A a Z, não aceita números"}
-        />
-        <Campo
-        type={"email"}
-        onHandleInput={onHandleInput}
-        name={"email"}
-        value={inputs.email}
-        text={"email"}
-        //pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"}
-        //title={"Letras de A a Z, mínimo de 3 caracteres"}
-        />
-        <Campo
-        type={"number"}
-        onHandleInput={onHandleInput}
-        name={"cep"}
-        value={inputs.cep}
-        text={"digite seu CEP"}
-        min="8"
-        />
+      </LogoContainer>
+      <Message>{message}</Message>
 
-        <Campo type={"submit"} />
-     </FormContainer>
-     {endereco &&
-     <div>
-       <p>{dados.nome}</p>
-       <p>{dados.email}</p>
-       <p>{endereco.cep}</p>
-       <p>{endereco.state}</p>
-       <p>{endereco.city}</p>
-       <p>{endereco.neighborhood}</p>
-       <p>{endereco.street}</p>
-       
-     </div> }
-     {(inputs.cep.length!==8 && inputs.cep!== "" ) && <h3>Cep deve ter 8 numeros</h3>}
-     {dados.cep===undefined && <h3></h3> }
+     <Formulario
+     dados={dados}
+     setDados={setDados}
+     message={message} 
+     setMessage={setMessage}
+     
+     />
+
+     <button onClick={()=>{setExibe(!exibe)}}>{exibe ? "Esconder Cadastro":"Mostrar Cadastro"}</button>
+     {dados===undefined&& setDados({cep:"",city:"", email:"",id:"", name:"", neighborhood:"", service:"", state:"", street:"", user_cep:"" })}
+     
+     {exibe && <div>
+    
+    <p>NOME: {dados.name}</p>
+    <p>EMAIL:{dados.email}</p>
+    <p>CEP:{dados.cep}</p>
+    <p>RUA:{dados.street}</p>
+    <p>BAIRRO: {dados.neighborhood}</p>
+    <p>CIDADE: {dados.city},</p>
+    <p>ESTADO:{dados.state}</p>
+  </div>}
+     
     </AppContainer>
   );
 }
